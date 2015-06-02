@@ -1,17 +1,21 @@
-require 'spec_helper'
+require "spec_helper"
 
-describe Khipu::Config do
-
-  it "should inject configuration methods on base module" do
-
-    expect(Khipu).to respond_to :configure
-    expect(Khipu).to respond_to :config
-    expect(Khipu.config).to be_kind_of Khipu::Config
-
-    Khipu.configure do |config|
-      expect(config).to be_kind_of Khipu::Config
-      expect(config).to be == Khipu.config
+module Khipu
+  describe Config do
+    describe "#receiver_id=" do
+      it "can set value" do
+        config = Config.new
+        config.receiver_id = "1231"
+        expect(config.receiver_id).to eq("1231")
+      end
     end
 
+    describe "#secret_key=" do
+      it "can set value" do
+        config = Config.new
+        config.secret_key = "123sadsawe3444"
+        expect(config.secret_key).to eq("123sadsawe3444")
+      end
+    end
   end
 end
