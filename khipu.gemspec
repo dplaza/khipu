@@ -7,8 +7,8 @@ Gem::Specification.new do |spec|
   spec.name          = "khipu"
   spec.version       = Khipu::VERSION
   spec.authors       = ["Diego Plaza"]
-  spec.email         = ["dplaza@alumnos.inf.utfsm.cl"]
-  spec.summary       = %q{Ruby implementation of Khipu platform}
+  spec.email         = ["diego@plaza.ninja"]
+  spec.summary       = %q{Ruby implementation of Khipu}
   # spec.description   = %q{TODO: Write a longer description. Optional.}
   spec.homepage      = ""
   spec.license       = "MIT"
