@@ -50,10 +50,10 @@ module Khipu
         raise "Receiver ID not applicable"
       else
         self.subject = json_response["subject"]
-        self.amount = json_response["amount"]
+        self.amount = json_response["amount"].to_i
         self.custom = json_response["custom"]
-        self.transaction_id = json_response["transaction_id"]
-        self.payment_id = json_response["payment_id"]
+        self.transaction_id = json_response["transaction_id"].to_i
+        self.payment_id = json_response["payment_id"].to_i
         self.currency = json_response["currency"]
         self.payer_email = json_response["payer_email"]
       end
