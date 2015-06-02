@@ -19,7 +19,7 @@ module Khipu
 
     describe "#initialize" do
       it "should be receive a response" do
-        json = { "api_version" => "1.3", "notification_token" => "9935b5e051a87d4214d987c9e51660bf23589908903e50f08aceb15c62eeb61c" }.to_json
+        json = { :api_version => "1.3", :notification_token => "9935b5e051a87d4214d987c9e51660bf23589908903e50f08aceb15c62eeb61c" }
         confirmation = Confirmation.new body: json
 
         expect(confirmation.transaction_id).to eq("133")
