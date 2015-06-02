@@ -47,7 +47,7 @@ module Khipu
 
       json_response = JSON.parse(response.body)
 
-      unless json_response["receiver_id"] == receiver_id
+      unless json_response["receiver_id"] == receiver_id.to_i
         raise "Receiver ID not applicable"
       else
         self.subject = json_response["subject"]
