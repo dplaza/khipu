@@ -4,6 +4,7 @@ require 'json'
 
 require "khipu/version"
 require "khipu/config"
+require "khipu/payment"
 require "khipu/confirmation"
 
 module Khipu

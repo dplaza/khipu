@@ -15,7 +15,7 @@ module Khipu
     attr_accessor :picture_url
 
     def initialize(options = {})
-      self.receiver_id = options[:receiver_id] || Config.receiver_id
+      self.receiver_id = options[:receiver_id] || Khipu.config.receiver_id
       self.subject = options[:subject]
       self.body = options[:body]
       self.amount = options[:amount]
@@ -45,7 +45,7 @@ module Khipu
 
     def generate_hash
       message = "receiver_id=#{receiver_id}&subject=#{subject}&body=#{body}&amount=#{amount}&payer_email=#{payer_email}&bank_id=#{bank_id}&expires_date=#{expires_date}&transaction_id=#{transaction_id}&custom=#{custom}&notify_url=#{notify_url}&return_url=#{return_url}&cancel_url=#{cancel_url}&picture_url=#{picture_url}"
-      OpenSSL::HMAC.hexdigest 'sha256', Config.secret_key, message
+      OpenSSL::HMAC.hexdigest 'sha256', Khipu.config.secret_key, message
     end
 
     def create_payment_url
