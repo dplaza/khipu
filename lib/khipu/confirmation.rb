@@ -12,11 +12,9 @@ module Khipu
     attr_accessor :payer_email
 
     def initialize(options = {})
-      body = JSON.parse(options[:body]) if options[:body]
-
       self.receiver_id = options[:receiver_id] || Khipu.config.receiver_id
-      self.api_version = body["api_version"] if options[:body]
-      self.notification_token = body["notification_token"] if options[:body]
+      self.api_version = options[:api_version] if options[:api_version]
+      self.notification_token = options[:notification_token] if options[:notification_token]
 
       verify!
       get_payment_notification
