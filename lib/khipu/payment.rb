@@ -70,7 +70,7 @@ module Khipu
         })
 
       url_id = JSON.parse(response.body)["id"]
-      "https://https://khipu.com/payment/simplified/#{url_id}"
+      "https://khipu.com/payment/simplified/#{url_id}"
     end
   end
 end
