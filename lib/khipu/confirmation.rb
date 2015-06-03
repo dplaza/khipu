@@ -54,7 +54,7 @@ module Khipu
     end
 
     def status_hash
-      message = "receiver_id=#{receiver_id}&notification_token=#{notification_token}"
+      message = "receiver_id=#{receiver_id}&payment_id=#{payment_id}"
       OpenSSL::HMAC.hexdigest 'sha256', Khipu.config.secret_key, message
     end
 
