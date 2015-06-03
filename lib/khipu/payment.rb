@@ -69,7 +69,7 @@ module Khipu
           "hash" => generate_hash
         })
 
-      JSON.parse(response.body)["url"]
+      JSON.parse(response.body)["manual-url"]
     end
   end
 end
