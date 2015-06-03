@@ -69,7 +69,8 @@ module Khipu
           "hash" => generate_hash
         })
 
-      JSON.parse(response.body)["manual-url"]
+      url_id = JSON.parse(response.body)["id"]
+      "https://https://khipu.com/payment/simplified/#{url_id}"
     end
   end
 end
