@@ -15,19 +15,19 @@ module Khipu
     attr_accessor :picture_url
 
     def initialize(options = {})
-      self.receiver_id = options[:receiver_id] || Khipu.config.receiver_id
-      self.subject = options[:subject]
-      self.body = options[:body]
-      self.amount = options[:amount]
-      self.notify_url = options[:notify_url]
-      self.return_url = options[:return_url]
-      self.cancel_url = options[:cancel_url]
-      self.custom = options[:custom]
+      self.receiver_id    = options[:receiver_id] || Khipu.config.receiver_id
+      self.subject        = options[:subject]
+      self.body           = options[:body]
+      self.amount         = options[:amount]
+      self.notify_url     = options[:notify_url]
+      self.return_url     = options[:return_url]
+      self.cancel_url     = options[:cancel_url]
+      self.custom         = options[:custom]
       self.transaction_id = options[:transaction_id]
-      self.payer_email = options[:payer_email]
-      self.expires_date = options[:expires_date]
-      self.bank_id = options[:bank_id]
-      self.picture_url = options[:picture_url]
+      self.payer_email    = options[:payer_email]
+      self.expires_date   = options[:expires_date]
+      self.bank_id        = options[:bank_id]
+      self.picture_url    = options[:picture_url]
     end
 
     def redirect_url
@@ -38,7 +38,7 @@ module Khipu
     private
 
     def verify!
-      raise ArgumentError, "Receiver ID required" if self.receiver_id.nil?    
+      raise ArgumentError, "Receiver ID required" if self.receiver_id.nil?
       raise ArgumentError, "Subject required" if self.subject.nil?
       raise ArgumentError, "Amount required" if self.amount.nil?
     end
@@ -53,21 +53,30 @@ module Khipu
       uri = URI.parse(url)
 
       response = Net::HTTP.post_form(uri, {
-          "receiver_id" => receiver_id,
-          "subject" => subject,
-          "body" => body,
-          "amount" => amount,
-          "notify_url" => notify_url,
-          "return_url" => return_url,
-          "cancel_url" => cancel_url,
-          "custom" => custom,
+          "receiver_id"    => receiver_id,
+          "subject"        => subject,
+          "body"           => body,
+          "amount"         => amount,
+          "notify_url"     => notify_url,
+          "return_url"     => return_url,
+          "cancel_url"     => cancel_url,
+          "custom"         => custom,
           "transaction_id" => transaction_id,
-          "payer_email" => payer_email,
-          "expires_date" => expires_date,
-          "bank_id" => bank_id,
-          "picture_url" => picture_url,
-          "hash" => generate_hash
+          "payer_email"    => payer_email,
+          "expires_date"   => expires_date,
+          "bank_id"        => bank_id,
+          "picture_url"    => picture_url,
+          "hash"           => generate_hash
         })
+
+      if Khipu.config.debug
+        puts "=== [Khipu DEBUG] ==="
+        puts "Response: #{response.body}"
+        puts "Subject: #{subject}"
+        puts "Amount: #{amount}"
+        puts "ReceiverID: #{Khipu.config.receiver_id}"
+        puts "SecretKey: #{Khipu.config.secret_key}"
+      end
 
       url_id = JSON.parse(response.body)["id"]
       "https://khipu.com/payment/simplified/#{url_id}"
